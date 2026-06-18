@@ -22,114 +22,92 @@
     --glow: rgba(59,130,246,.5);
   }
   html, body { background: var(--bg); color: var(--txt); }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
-    min-height: 100vh; overflow-x: hidden;
-  }
-  body::before {
-    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background: radial-gradient(720px circle at 50% -6%, rgba(59,130,246,.16), transparent 55%);
-  }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif; min-height: 100vh; overflow-x: hidden; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(720px circle at 50% -6%, rgba(59,130,246,.16), transparent 55%); }
 
-  /* ---- Top bar / logo ---- */
-  .topbar { position: relative; z-index: 1; display: flex; align-items: center;
-    justify-content: space-between; max-width: 540px; margin: 0 auto;
-    padding: calc(16px + env(safe-area-inset-top)) 16px 6px; }
+  .topbar { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between;
+    max-width: 540px; margin: 0 auto; padding: calc(16px + env(safe-area-inset-top)) 16px 6px; }
   .brand { display: flex; align-items: center; gap: 11px; }
-  .brand-ic { width: 40px; height: 40px; border-radius: 12px;
-    background: linear-gradient(135deg, #2563eb, #4f9bff);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 20px var(--glow), inset 0 1px 0 rgba(255,255,255,.3); }
+  .brand-ic { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #2563eb, #4f9bff);
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px var(--glow), inset 0 1px 0 rgba(255,255,255,.3); }
   .brand-ic svg { width: 22px; height: 22px; color: #fff; }
-  .wordmark { font-family: "Orbitron", system-ui, sans-serif; font-weight: 800;
-    font-size: 23px; letter-spacing: .02em; line-height: 1; }
+  .wordmark { font-family: "Orbitron", system-ui, sans-serif; font-weight: 800; font-size: 23px; letter-spacing: .02em; line-height: 1; }
   .wordmark .b { color: var(--blue-2); text-shadow: 0 0 16px rgba(91,157,255,.6); }
   .wordmark .w { color: #fff; }
-  .top-btn { width: 38px; height: 38px; border-radius: 11px; background: var(--card);
-    border: 1px solid var(--border); color: var(--txt-2); display: flex;
-    align-items: center; justify-content: center; cursor: pointer; }
+  .top-btn { width: 38px; height: 38px; border-radius: 11px; background: var(--card); border: 1px solid var(--border);
+    color: var(--txt-2); display: flex; align-items: center; justify-content: center; cursor: pointer; }
   .top-btn svg { width: 18px; height: 18px; }
   .top-btn:active { color: var(--txt); }
 
-  /* ---- View container ---- */
-  .view { position: relative; z-index: 1; max-width: 540px; margin: 0 auto;
-    padding: 10px 16px calc(112px + env(safe-area-inset-bottom)); }
+  .view { position: relative; z-index: 1; max-width: 540px; margin: 0 auto; padding: 10px 16px calc(112px + env(safe-area-inset-bottom)); }
 
-  /* ---- Tabs (días) ---- */
   .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
   .tabs::-webkit-scrollbar { display: none; }
   .tab { padding: 8px 16px; border-radius: 999px; font-size: 14px; white-space: nowrap; flex-shrink: 0;
-    background: var(--card); border: 1px solid var(--border); color: var(--txt-2); cursor: pointer;
-    transition: .15s; }
-  .tab.active { background: var(--blue); color: #fff; font-weight: 600; border-color: var(--blue);
-    box-shadow: 0 0 16px var(--glow); }
+    background: var(--card); border: 1px solid var(--border); color: var(--txt-2); cursor: pointer; transition: .15s; }
+  .tab.active { background: var(--blue); color: #fff; font-weight: 600; border-color: var(--blue); box-shadow: 0 0 16px var(--glow); }
+  .tab-add { color: var(--blue-2); font-weight: 700; border-style: dashed; }
 
-  /* ---- Day head ---- */
   .day-head { margin: 16px 0 20px; }
-  .day-name { width: 100%; background: transparent; border: none; color: var(--txt);
+  .day-top { display: flex; align-items: center; gap: 8px; }
+  .day-name { flex: 1; min-width: 0; background: transparent; border: none; color: var(--txt);
     font-size: 26px; font-weight: 700; letter-spacing: -0.02em; padding: 2px 4px; border-radius: 8px; }
-  .day-sub { width: 100%; background: transparent; border: none; color: var(--txt-2);
-    font-size: 14px; padding: 2px 4px; border-radius: 8px; margin-top: 2px; }
-  .day-name:focus, .day-sub:focus { outline: none; background: var(--card); }
+  .day-name:focus { outline: none; background: var(--card); }
+  .day-del { background: none; border: none; color: var(--txt-3); cursor: pointer; flex-shrink: 0; padding: 6px; }
+  .day-del svg { width: 18px; height: 18px; }
+  .day-del:active { color: var(--red); }
+  .day-sub { width: 100%; background: transparent; border: none; color: var(--txt-2); font-size: 14px; padding: 2px 4px; border-radius: 8px; margin-top: 2px; }
+  .day-sub:focus { outline: none; background: var(--card); }
 
   .progress-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
   .bar { flex: 1; height: 8px; border-radius: 999px; background: var(--card-2); overflow: hidden; }
-  .bar > div { height: 100%; background: linear-gradient(90deg, #2563eb, #4f9bff);
-    box-shadow: 0 0 10px var(--glow); transition: width .25s; }
+  .bar > div { height: 100%; background: linear-gradient(90deg, #2563eb, #4f9bff); box-shadow: 0 0 10px var(--glow); transition: width .25s; }
   .count { font-size: 14px; color: var(--txt-2); font-variant-numeric: tabular-nums; flex-shrink: 0; }
-  .clear { font-size: 12px; color: var(--txt-3); background: none; border: none; cursor: pointer;
-    text-decoration: underline; text-underline-offset: 2px; flex-shrink: 0; }
+  .clear { font-size: 12px; color: var(--txt-3); background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; flex-shrink: 0; }
   .clear:active { color: var(--txt); }
 
-  /* ---- Exercise card ---- */
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-    padding: 16px; margin-bottom: 12px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
   .card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-  .ex-name { flex: 1; min-width: 0; background: transparent; border: none; color: var(--txt);
-    font-size: 16px; font-weight: 600; padding: 2px 4px; border-radius: 8px; }
+  .ex-name { flex: 1; min-width: 0; background: transparent; border: none; color: var(--txt); font-size: 16px; font-weight: 600; padding: 2px 4px; border-radius: 8px; }
   .ex-name:focus { outline: none; background: var(--card-2); }
   .ex-count { font-size: 12px; color: var(--txt-3); font-variant-numeric: tabular-nums; flex-shrink: 0; }
-  .trash { background: none; border: none; color: var(--txt-3); cursor: pointer; font-size: 15px; flex-shrink: 0; }
+  .trash { background: none; border: none; color: var(--txt-3); cursor: pointer; flex-shrink: 0; padding: 2px; }
+  .trash svg { width: 17px; height: 17px; }
   .trash:active { color: var(--red); }
 
   .set { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-  .idx { width: 24px; height: 24px; border-radius: 7px; background: var(--card-2); color: var(--txt-2);
-    font-size: 12px; font-family: monospace; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .idx { width: 24px; height: 24px; border-radius: 7px; background: var(--card-2); color: var(--txt-2); font-size: 12px; font-family: monospace;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .field { display: flex; align-items: center; gap: 4px; }
-  .field input { background: var(--card-2); border: 1px solid var(--border); border-radius: 8px;
-    padding: 7px 8px; text-align: right; font-variant-numeric: tabular-nums; color: var(--txt); font-size: 14px; }
+  .field input { background: var(--card-2); border: 1px solid var(--border); border-radius: 8px; padding: 7px 8px; text-align: right;
+    font-variant-numeric: tabular-nums; color: var(--txt); font-size: 14px; }
   .field input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
   .kg { width: 62px; } .reps { width: 52px; }
   .unit { font-size: 12px; color: var(--txt-3); }
-  .done { width: 36px; height: 36px; border-radius: 9px; border: 1px solid #2f3b5c; background: transparent;
-    color: var(--txt-3); display: flex; align-items: center; justify-content: center; cursor: pointer;
-    flex-shrink: 0; transition: .15s; }
+  .done { width: 36px; height: 36px; border-radius: 9px; border: 1px solid #2f3b5c; background: transparent; color: var(--txt-3);
+    display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: .15s; }
   .done svg { width: 18px; height: 18px; }
   .done.on { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 0 12px var(--glow); }
-  .rm { margin-left: auto; background: none; border: none; color: var(--txt-3); cursor: pointer;
-    font-size: 16px; flex-shrink: 0; padding: 4px; }
+  .rm { margin-left: auto; background: none; border: none; color: var(--txt-3); cursor: pointer; font-size: 16px; flex-shrink: 0; padding: 4px; }
   .rm:active { color: var(--red); }
 
-  .add-set { margin-top: 12px; width: 100%; display: flex; align-items: center; justify-content: center;
-    gap: 6px; font-size: 14px; color: var(--blue-2); background: transparent; cursor: pointer;
-    border: 1px dashed #2f3b5c; border-radius: 9px; padding: 9px; }
+  .add-set { margin-top: 12px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px;
+    color: var(--blue-2); background: transparent; cursor: pointer; border: 1px dashed #2f3b5c; border-radius: 9px; padding: 9px; }
   .add-set:active { border-color: var(--blue); }
-  .add-ex { margin-top: 16px; width: 100%; display: flex; align-items: center; justify-content: center;
-    gap: 8px; font-size: 14px; font-weight: 600; color: var(--txt); background: var(--card);
-    border: 1px solid var(--border); border-radius: 16px; padding: 14px; cursor: pointer; }
+  .add-ex { margin-top: 16px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px;
+    font-weight: 600; color: var(--txt); background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px; cursor: pointer; }
   .add-ex:active { border-color: #2f3b5c; }
   .foot { text-align: center; font-size: 12px; color: var(--txt-3); margin-top: 24px; }
 
-  /* ---- Hábitos ---- */
-  .eyebrow { font-size: 11px; letter-spacing: .2em; color: var(--blue-2); font-weight: 700; }
-  .hb-date { font-size: 22px; font-weight: 700; margin-top: 4px; letter-spacing: -0.01em; }
+  /* Hábitos */
   .hb-head { margin: 6px 0 20px; }
+  .hb-title { font-size: 25px; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
+  .title-accent { width: 44px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #2563eb, #4f9bff); box-shadow: 0 0 10px var(--glow); margin: 9px 0 2px; }
   .hb-list { display: flex; flex-direction: column; gap: 10px; }
-  .hb-item { display: flex; align-items: center; gap: 14px; background: var(--card);
-    border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: .15s; }
+  .hb-item { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: .15s; }
   .hb-item:active { background: var(--card-2); }
-  .hb-check { width: 26px; height: 26px; border-radius: 8px; border: 1.5px solid #2f3b5c; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center; color: #fff; transition: .15s; }
+  .hb-check { width: 26px; height: 26px; border-radius: 8px; border: 1.5px solid #2f3b5c; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; transition: .15s; }
   .hb-check.on { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 12px var(--glow); }
   .hb-check svg { width: 16px; height: 16px; }
   .hb-name { flex: 1; font-size: 15px; font-weight: 500; }
@@ -137,23 +115,42 @@
   .hb-rm { background: none; border: none; color: var(--txt-3); font-size: 15px; cursor: pointer; flex-shrink: 0; padding: 4px; }
   .hb-rm:active { color: var(--red); }
   .hb-add { display: flex; gap: 8px; margin-top: 16px; }
-  .hb-add input { flex: 1; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px;
-    padding: 13px 14px; color: var(--txt); font-size: 15px; }
+  .hb-add input { flex: 1; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 13px 14px; color: var(--txt); font-size: 15px; }
   .hb-add input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
-  .hb-add-btn { width: 48px; border: none; border-radius: 12px; background: var(--blue); color: #fff;
-    font-size: 24px; cursor: pointer; box-shadow: 0 0 16px var(--glow); }
+  .hb-add-btn { width: 48px; border: none; border-radius: 12px; background: var(--blue); color: #fff; font-size: 24px; cursor: pointer; box-shadow: 0 0 16px var(--glow); }
   .hb-add-btn:active { filter: brightness(1.12); }
   .empty { color: var(--txt-3); text-align: center; padding: 28px 16px; font-size: 14px; line-height: 1.6; }
 
-  /* ---- Bottom nav ---- */
+  /* Cardio */
+  .cardio-modes { display: flex; gap: 8px; margin: 8px 0 8px; }
+  .cmode { flex: 1; padding: 11px; border-radius: 12px; background: var(--card); border: 1px solid var(--border); color: var(--txt-2); font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; }
+  .cmode.active { background: var(--blue); color: #fff; border-color: var(--blue); box-shadow: 0 0 14px var(--glow); }
+  .time-display { font-family: "Orbitron", monospace; font-size: 62px; font-weight: 800; text-align: center; letter-spacing: .02em; margin: 26px 0; color: #fff; text-shadow: 0 0 26px rgba(91,157,255,.4); font-variant-numeric: tabular-nums; }
+  .time-display.finished { color: var(--blue-2); animation: pulse 1s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+  .ctrl-row { display: flex; gap: 10px; justify-content: center; margin-top: 6px; }
+  .ctrl { flex: 1; max-width: 160px; padding: 15px; border-radius: 14px; border: none; font-size: 15px; font-weight: 600; cursor: pointer; }
+  .ctrl.primary { background: var(--blue); color: #fff; box-shadow: 0 0 18px var(--glow); }
+  .ctrl.ghost { background: var(--card); color: var(--txt); border: 1px solid var(--border); }
+  .ctrl:active { filter: brightness(1.1); }
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 18px; }
+  .preset { padding: 9px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); color: var(--txt-2); font-size: 13px; cursor: pointer; font-variant-numeric: tabular-nums; }
+  .preset.on { border-color: var(--blue); color: var(--blue-2); }
+  .custom-time { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 6px; }
+  .ct-input { width: 74px; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 13px; text-align: center; color: var(--txt); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ct-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+  .ct-colon { font-size: 24px; font-weight: 700; color: var(--txt-2); }
+  .ct-hint { text-align: center; font-size: 12px; color: var(--txt-3); margin-bottom: 22px; }
+  .laps { margin-top: 26px; display: flex; flex-direction: column; gap: 6px; }
+  .lap { display: flex; justify-content: space-between; padding: 11px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-variant-numeric: tabular-nums; font-size: 14px; }
+  .lap span:first-child { color: var(--txt-2); }
+
   .navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; justify-content: center;
-    padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-    background: rgba(6,9,17,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    border-top: 1px solid var(--border); }
-  .nav-inner { display: flex; gap: 8px; width: 100%; max-width: 540px; }
-  .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0;
-    border: none; background: none; color: var(--txt-3); font-size: 11px; font-weight: 600; cursor: pointer;
-    border-radius: 12px; transition: .15s; }
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: rgba(6,9,17,.82);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--border); }
+  .nav-inner { display: flex; gap: 4px; width: 100%; max-width: 540px; }
+  .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0; border: none; background: none;
+    color: var(--txt-3); font-size: 11px; font-weight: 600; cursor: pointer; border-radius: 12px; transition: .15s; }
   .nav-item svg { width: 23px; height: 23px; }
   .nav-item.active { color: var(--blue-2); }
   .nav-item.active svg { filter: drop-shadow(0 0 6px var(--glow)); }
@@ -162,14 +159,10 @@
 <body>
   <div class="topbar">
     <div class="brand">
-      <div class="brand-ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5v11M3.5 9v5M17.5 6.5v11M20.5 9v5M6.5 12h11"/></svg>
-      </div>
+      <div class="brand-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5v11M3.5 9v5M17.5 6.5v11M20.5 9v5M6.5 12h11"/></svg></div>
       <div class="wordmark"><span class="b">J-</span><span class="w">FIT</span></div>
     </div>
-    <button class="top-btn" data-action="reset" title="Restaurar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-    </button>
+    <button class="top-btn" data-action="reset" title="Restaurar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
   </div>
 
   <div id="view" class="view"></div>
@@ -183,6 +176,10 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       <span>Hábitos</span>
     </button>
+    <button class="nav-item" id="nav-cardio" data-view="cardio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M9 2h6"/></svg>
+      <span>Cardio</span>
+    </button>
   </div></nav>
 
 <script>
@@ -192,6 +189,7 @@ const mkSet = () => ({ id: uid(), kg: "", reps: "", done: false });
 const mkSets = n => Array.from({ length: n }, mkSet);
 const mkEx = (name, n) => ({ id: uid(), name, sets: mkSets(n) });
 const checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+const trashSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>';
 
 const DEFAULT = {
   days: [
@@ -220,20 +218,38 @@ const DEFAULT = {
 };
 
 function today(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
-function todayLabel(){ const s=new Date().toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long"}); return s.charAt(0).toUpperCase()+s.slice(1); }
 function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
-// ---- Estado + migración ----
+// Estado + migración
 let state;
 try { const raw = localStorage.getItem(KEY); state = raw ? JSON.parse(raw) : null; } catch(e) { state = null; }
 if (!state || !state.days) state = JSON.parse(JSON.stringify(DEFAULT));
 if (!Array.isArray(state.habits)) state.habits = JSON.parse(JSON.stringify(DEFAULT.habits));
 if (!state.habitsDate) state.habitsDate = today();
+state.days.forEach(d => { if (d.subtitle == null) d.subtitle = ""; });
 
 let view = "entreno";
 let activeId = ({1:"lun",2:"mar",3:"mie",4:"jue",5:"vie"})[new Date().getDay()] || "lun";
 if (!state.days.find(d => d.id === activeId)) activeId = state.days[0].id;
-let pendingFocusHabit = false;
+let pendingFocusHabit = false, pendingFocusDay = false;
+
+// Cardio (no se persiste)
+let cardioMode = "stopwatch";
+let swRunning=false, swAccum=0, swStartTs=0, swLaps=[];
+let tmRunning=false, tmRemainingMs=60000, tmTarget=60000, tmEndTs=0, tmFinished=false;
+let audioCtx=null;
+function initAudio(){ try{ audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)(); if(audioCtx.state==="suspended") audioCtx.resume(); }catch(e){} }
+function beep(){
+  try{ initAudio(); if(!audioCtx) throw 0; const now=audioCtx.currentTime;
+    for(let i=0;i<3;i++){ const o=audioCtx.createOscillator(), g=audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination);
+      o.type="sine"; o.frequency.value=880; const t=now+i*0.28;
+      g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.35,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+0.18);
+      o.start(t); o.stop(t+0.2); } }catch(e){}
+  try{ if(navigator.vibrate) navigator.vibrate([200,100,200,100,200]); }catch(e){}
+}
+function fmt(ms, ceil){ let s = ceil?Math.ceil(ms/1000):Math.floor(ms/1000); if(s<0)s=0;
+  const h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=s%60;
+  const mm=String(m).padStart(2,"0"), ss=String(sec).padStart(2,"0"); return h>0 ? h+":"+mm+":"+ss : mm+":"+ss; }
 
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} }
 const day = () => state.days.find(d => d.id === activeId) || state.days[0];
@@ -248,7 +264,7 @@ function renderEntreno(){
 
   const tabs = state.days.map(x =>
     `<button class="tab${x.id===activeId?' active':''}" data-action="tab" data-day="${x.id}">${esc(x.name)}</button>`
-  ).join("");
+  ).join("") + `<button class="tab tab-add" data-action="addday" title="Agregar día">+</button>`;
 
   const cards = d.exercises.map(ex => {
     const sets = ex.sets.map((s,i) => `
@@ -263,7 +279,7 @@ function renderEntreno(){
       <div class="card-head">
         <input class="ex-name" type="text" value="${esc(ex.name)}" data-action="exname" data-ex="${ex.id}">
         <span class="ex-count">${ex.sets.length} sets</span>
-        <button class="trash" data-action="removeex" data-ex="${ex.id}" title="Eliminar ejercicio">🗑</button>
+        <button class="trash" data-action="removeex" data-ex="${ex.id}" title="Eliminar ejercicio">${trashSvg}</button>
       </div>
       ${sets}
       <button class="add-set" data-action="addset" data-ex="${ex.id}">+ Serie</button>
@@ -273,7 +289,10 @@ function renderEntreno(){
   return `
     <div class="tabs">${tabs}</div>
     <div class="day-head">
-      <input class="day-name" type="text" value="${esc(d.name)}" data-action="dayname">
+      <div class="day-top">
+        <input class="day-name" type="text" value="${esc(d.name)}" data-action="dayname">
+        <button class="day-del" data-action="delday" title="Eliminar día">${trashSvg}</button>
+      </div>
       <input class="day-sub" type="text" value="${esc(d.subtitle)}" placeholder="Grupos musculares…" data-action="subtitle">
       <div class="progress-row">
         <div class="bar"><div style="width:${pct}%"></div></div>
@@ -281,7 +300,7 @@ function renderEntreno(){
         <button class="clear" data-action="clear">Limpiar</button>
       </div>
     </div>
-    ${cards}
+    ${cards || '<div class="empty">Día vacío.<br>Agregá ejercicios acá abajo 👇</div>'}
     <button class="add-ex" data-action="addex">+ Agregar ejercicio</button>
     <p class="foot">Se guarda solo en este dispositivo</p>`;
 }
@@ -300,8 +319,8 @@ function renderHabitos(){
 
   return `
     <div class="hb-head">
-      <div class="eyebrow">HOY</div>
-      <div class="hb-date">${todayLabel()}</div>
+      <div class="hb-title">Daily Checklist</div>
+      <div class="title-accent"></div>
       <div class="progress-row">
         <div class="bar"><div style="width:${pct}%"></div></div>
         <span class="count">${done}/${total}</span>
@@ -315,24 +334,89 @@ function renderHabitos(){
     <p class="foot">Se reinician solas cada día</p>`;
 }
 
+// ---- Render: Cardio ----
+function renderCardio(){
+  const modes = `<div class="cardio-modes">
+    <button class="cmode${cardioMode==='stopwatch'?' active':''}" data-action="cardio-mode" data-mode="stopwatch">Cronómetro</button>
+    <button class="cmode${cardioMode==='timer'?' active':''}" data-action="cardio-mode" data-mode="timer">Temporizador</button>
+  </div>`;
+
+  if (cardioMode === "stopwatch") {
+    const elapsed = swRunning ? swAccum + (Date.now()-swStartTs) : swAccum;
+    const laps = swLaps.length ? `<div class="laps">${swLaps.map((t,i)=>({t,i})).reverse().map(o=>`<div class="lap"><span>Vuelta ${o.i+1}</span><span>${fmt(o.t)}</span></div>`).join("")}</div>` : "";
+    return modes + `
+      <div class="time-display" id="swTime">${fmt(elapsed)}</div>
+      <div class="ctrl-row">
+        <button class="ctrl ${swRunning?'ghost':'primary'}" data-action="sw-toggle">${swRunning?'Pausar':'Iniciar'}</button>
+        ${swRunning?'<button class="ctrl ghost" data-action="sw-lap">Vuelta</button>':''}
+        <button class="ctrl ghost" data-action="sw-reset">Reiniciar</button>
+      </div>${laps}`;
+  } else {
+    const rem = tmRunning ? Math.max(0, tmEndTs-Date.now()) : tmRemainingMs;
+    const presetVals = [30,60,90,120,180,300];
+    const editable = !tmRunning && !tmFinished;
+    const cm = Math.floor(tmTarget/60000), cs = Math.floor((tmTarget%60000)/1000);
+    const editor = editable ? `
+      <div class="presets">${presetVals.map(v=>`<button class="preset${tmTarget===v*1000?' on':''}" data-action="tm-preset" data-sec="${v}">${fmt(v*1000)}</button>`).join("")}</div>
+      <div class="custom-time">
+        <input id="tmMin" class="ct-input" type="text" inputmode="numeric" maxlength="3" value="${cm}" data-action="tm-min">
+        <span class="ct-colon">:</span>
+        <input id="tmSec" class="ct-input" type="text" inputmode="numeric" maxlength="2" value="${String(cs).padStart(2,'0')}" data-action="tm-sec">
+      </div>
+      <div class="ct-hint">minutos : segundos — personalizá lo que quieras</div>` : "";
+    let ctrls;
+    if (tmRunning) ctrls = '<button class="ctrl ghost" data-action="tm-toggle">Pausar</button><button class="ctrl ghost" data-action="tm-reset">Reiniciar</button>';
+    else if (tmFinished) ctrls = '<button class="ctrl primary" data-action="tm-reset">Reiniciar</button>';
+    else ctrls = '<button class="ctrl primary" data-action="tm-toggle">Iniciar</button>';
+    return modes + `
+      <div class="time-display${tmFinished?' finished':''}" id="tmTime">${tmFinished?'00:00':fmt(rem,true)}</div>
+      ${editor}
+      <div class="ctrl-row">${ctrls}</div>`;
+  }
+}
+
 function renderApp(){
   checkDailyReset();
   document.getElementById("nav-entreno").classList.toggle("active", view==="entreno");
   document.getElementById("nav-habitos").classList.toggle("active", view==="habitos");
-  document.getElementById("view").innerHTML = view==="entreno" ? renderEntreno() : renderHabitos();
+  document.getElementById("nav-cardio").classList.toggle("active", view==="cardio");
+  document.querySelector(".top-btn").style.display = view==="cardio" ? "none" : "flex";
+  const v = document.getElementById("view");
+  v.innerHTML = view==="entreno" ? renderEntreno() : (view==="habitos" ? renderHabitos() : renderCardio());
   if (view==="habitos" && pendingFocusHabit) { const i=document.getElementById("habitInput"); if(i) i.focus(); pendingFocusHabit=false; }
+  if (view==="entreno" && pendingFocusDay) { const i=v.querySelector(".day-name"); if(i){ i.focus(); i.select(); } pendingFocusDay=false; }
 }
 
 function addHabit(){
   const i = document.getElementById("habitInput"); if(!i) return;
-  const v = i.value.trim(); if(!v) return;
-  state.habits.push({ id: uid(), name: v, done: false });
+  const val = i.value.trim(); if(!val) return;
+  state.habits.push({ id: uid(), name: val, done: false });
   save(); pendingFocusHabit = true; renderApp();
 }
 
-// ---- Eventos (delegación en body) ----
+// ---- Tick (timers) ----
+function tick(){
+  const now = Date.now();
+  if (tmRunning){
+    const rem = tmEndTs - now;
+    if (rem <= 0){ tmRunning=false; tmRemainingMs=0; tmFinished=true; beep(); if(view==="cardio") renderApp(); }
+    else { tmRemainingMs = rem; if(view==="cardio" && cardioMode==="timer"){ const el=document.getElementById("tmTime"); if(el) el.textContent=fmt(rem,true); } }
+  }
+  if (swRunning && view==="cardio" && cardioMode==="stopwatch"){ const el=document.getElementById("swTime"); if(el) el.textContent=fmt(swAccum+(now-swStartTs)); }
+}
+setInterval(tick, 100);
+
+// ---- Eventos ----
 document.body.addEventListener("input", e => {
   const t = e.target, a = t.dataset.action; if(!a) return;
+  if (a === "tm-min" || a === "tm-sec") {
+    const mEl=document.getElementById("tmMin"), sEl=document.getElementById("tmSec");
+    const mm=parseInt(mEl&&mEl.value)||0, ss=parseInt(sEl&&sEl.value)||0;
+    tmTarget = Math.min(3600000, Math.max(1000, (mm*60+ss)*1000));
+    tmRemainingMs = tmTarget;
+    const disp=document.getElementById("tmTime"); if(disp) disp.textContent = fmt(tmTarget);
+    return;
+  }
   const d = day();
   if (a === "dayname") d.name = t.value;
   else if (a === "subtitle") d.subtitle = t.value;
@@ -354,25 +438,39 @@ document.body.addEventListener("click", e => {
 
   if (a === "reset") {
     if (view === "entreno") {
-      if (confirm("¿Restaurar la rutina original? Se borran los kilos cargados.")) {
+      if (confirm("¿Restaurar la rutina original? Se borran los kilos y los días que agregaste.")) {
         state.days = JSON.parse(JSON.stringify(DEFAULT.days));
         activeId = ({1:"lun",2:"mar",3:"mie",4:"jue",5:"vie"})[new Date().getDay()] || "lun";
         if (!state.days.find(d=>d.id===activeId)) activeId = state.days[0].id;
         save(); renderApp();
       }
-    } else {
+    } else if (view === "habitos") {
       if (confirm("¿Restaurar las tareas diarias por defecto?")) {
-        state.habits = JSON.parse(JSON.stringify(DEFAULT.habits));
-        state.habitsDate = today(); save(); renderApp();
+        state.habits = JSON.parse(JSON.stringify(DEFAULT.habits)); state.habitsDate = today(); save(); renderApp();
       }
     }
     return;
   }
 
+  // Hábitos
   if (a === "habit-add") { addHabit(); return; }
   if (a === "habit-toggle") { const h=state.habits.find(x=>x.id===el.dataset.id); if(h) h.done=!h.done; save(); renderApp(); return; }
   if (a === "habit-remove") { state.habits = state.habits.filter(x=>x.id!==el.dataset.id); save(); renderApp(); return; }
 
+  // Cardio
+  if (a === "cardio-mode") { cardioMode = el.dataset.mode; renderApp(); return; }
+  if (a === "sw-toggle") { if(swRunning){ swAccum+=Date.now()-swStartTs; swRunning=false; } else { swStartTs=Date.now(); swRunning=true; } renderApp(); return; }
+  if (a === "sw-lap") { swLaps.push(swAccum+(Date.now()-swStartTs)); renderApp(); return; }
+  if (a === "sw-reset") { swRunning=false; swAccum=0; swStartTs=0; swLaps=[]; renderApp(); return; }
+  if (a === "tm-preset") { tmTarget=parseInt(el.dataset.sec)*1000; tmRemainingMs=tmTarget; tmFinished=false; renderApp(); return; }
+  if (a === "tm-toggle") { if(tmRunning){ tmRemainingMs=Math.max(0,tmEndTs-Date.now()); tmRunning=false; } else { initAudio(); tmEndTs=Date.now()+tmRemainingMs; tmRunning=true; tmFinished=false; } renderApp(); return; }
+  if (a === "tm-reset") { tmRunning=false; tmFinished=false; tmRemainingMs=tmTarget; renderApp(); return; }
+
+  // Días
+  if (a === "addday") { const nd={id:uid(),name:"Nuevo",subtitle:"",exercises:[]}; state.days.push(nd); activeId=nd.id; pendingFocusDay=true; save(); renderApp(); return; }
+  if (a === "delday") { if(state.days.length<=1){ alert("Tiene que quedar al menos un día."); return; } if(confirm("¿Eliminar este día?")){ state.days=state.days.filter(x=>x.id!==activeId); activeId=state.days[0].id; save(); renderApp(); } return; }
+
+  // Entreno
   if (a === "tab") { activeId = el.dataset.day; renderApp(); return; }
   const d = day();
   const ex = el.dataset.ex && d.exercises.find(x=>x.id===el.dataset.ex);
