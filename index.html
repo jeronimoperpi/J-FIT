@@ -270,6 +270,18 @@
   .date-field { position: relative; display: flex; align-items: center; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
   .date-disp { font-size: 15px; color: var(--txt); font-variant-numeric: tabular-nums; }
   .date-native { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; border: none; background: none; margin: 0; padding: 0; }
+  .scan-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(180deg, #15233f, #101a30); border: 1px solid #2a3a5e; color: var(--blue-2); font-size: 14px; font-weight: 600; padding: 13px; border-radius: 12px; cursor: pointer; margin-bottom: 14px; }
+  .scan-btn:active { background: #0d1525; }
+  .scan-overlay { position: fixed; inset: 0; z-index: 1000; background: #05080f; display: flex; flex-direction: column; overflow-y: auto; }
+  .scan-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; padding-top: max(16px, env(safe-area-inset-top)); flex-shrink: 0; }
+  .scan-title { font-size: 17px; font-weight: 700; color: #fff; }
+  .scan-x { background: rgba(255,255,255,.08); border: none; color: #fff; width: 34px; height: 34px; border-radius: 50%; font-size: 15px; cursor: pointer; flex-shrink: 0; }
+  .scan-reader { width: 100%; background: #000; overflow: hidden; min-height: 240px; }
+  .scan-reader video { width: 100% !important; display: block; }
+  .scan-reader img { display: none; }
+  .scan-status { padding: 18px 22px 8px; color: var(--txt-2); font-size: 14px; text-align: center; line-height: 1.5; }
+  .scan-actions { display: flex; flex-direction: column; gap: 10px; padding: 12px 22px 24px; }
+  .scan-actions .ctrl { width: 100%; max-width: none; }
   .navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; justify-content: center;
     padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: rgba(6,9,17,.82);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--border); }
@@ -318,6 +330,7 @@
     </button>
   </div></nav>
   <div id="sheetHost"></div>
+  <div id="scanHost"></div>
 
 <script>
 const KEY = "rutina_jero_v1";
@@ -782,6 +795,7 @@ function renderComida(){
     </div>
     <button class="cal-edit" data-action="cal-open">Editar meta</button>
     <div class="cal-search"><input id="foodSearch" type="text" placeholder="🔍 Buscar alimento…" value="${esc(foodQuery)}" data-action="food-search"></div>
+    <button class="scan-btn" data-action="scan-open">📷 Escanear código de barras</button>
     <div id="foodResults">${renderResults(foodQuery)}</div>
     <button class="cal-create" data-action="food-create-open">+ Crear alimento propio</button>
     <div class="diary-head"><span class="t">Hoy</span><span class="s">${state.diary.length} ítems · ${tot.kcal} kcal</span></div>
@@ -880,6 +894,53 @@ function renderProgreso(){
     </div>
     ${list?`<div class="w-list-head">Historial</div>${list}`:""}
     ${renderVolumen()}`;
+}
+
+// ===== Escáner de código de barras =====
+let scanner=null, h5Loading=null, lastScanName="";
+function loadH5(){
+  if(window.__Html5QrcodeLibrary__||window.Html5Qrcode) return Promise.resolve();
+  if(h5Loading) return h5Loading;
+  h5Loading=new Promise((res,rej)=>{ const sc=document.createElement("script"); sc.src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"; sc.onload=()=>res(); sc.onerror=()=>{ h5Loading=null; rej(new Error("load")); }; document.head.appendChild(sc); });
+  return h5Loading;
+}
+function scanStatus(t){ const s=document.getElementById("scanStatus"); if(s) s.textContent=t; }
+function scanActions(html){ const a=document.getElementById("scanActions"); if(a) a.innerHTML=html||""; }
+function scanOverlayHTML(){ return `<div class="scan-overlay"><div class="scan-head"><span class="scan-title">Escanear código</span><button class="scan-x" data-action="scan-close">✕</button></div><div id="qrReader" class="scan-reader"></div><div class="scan-status" id="scanStatus">Iniciando cámara…</div><div class="scan-actions" id="scanActions"></div></div>`; }
+async function openScanner(){
+  const host=document.getElementById("scanHost"); if(!host) return;
+  host.innerHTML=scanOverlayHTML();
+  scanStatus("Cargando lector…");
+  try{ await loadH5(); }catch(e){ scanStatus("No se pudo cargar el lector. Revisá tu conexión a internet."); scanActions('<button class="ctrl ghost" data-action="scan-close">Cerrar</button>'); return; }
+  const LIB=window.__Html5QrcodeLibrary__||{}; const H5=window.Html5Qrcode||LIB.Html5Qrcode; const FMT=window.Html5QrcodeSupportedFormats||LIB.Html5QrcodeSupportedFormats;
+  if(!H5){ scanStatus("No se pudo iniciar el lector."); return; }
+  let handled=false;
+  scanner=new H5("qrReader", FMT?{formatsToSupport:[FMT.EAN_13,FMT.EAN_8,FMT.UPC_A,FMT.UPC_E],verbose:false}:{verbose:false});
+  scanStatus("Apuntá la cámara al código de barras…");
+  try{
+    await scanner.start({facingMode:"environment"}, {fps:10, qrbox:(w)=>{ const ww=Math.max(160,Math.min(300,(w||300)-30)); return {width:ww,height:Math.round(ww*0.6)}; }}, (text)=>{ if(handled)return; handled=true; onBarcode(String(text)); }, ()=>{});
+  }catch(err){ scanStatus("No pudimos abrir la cámara. Dale permiso de cámara a Safari y volvé a intentar."); scanActions('<button class="ctrl primary" data-action="scan-retry">Reintentar</button><button class="ctrl ghost" data-action="scan-close">Cerrar</button>'); }
+}
+function stopScanner(){ return new Promise((res)=>{ if(!scanner){ res(); return; } const sc=scanner; scanner=null; try{ sc.stop().then(()=>{ try{sc.clear();}catch(e){} res(); }).catch(()=>{ res(); }); }catch(e){ res(); } }); }
+function closeScanner(){ stopScanner().then(()=>{ const host=document.getElementById("scanHost"); if(host) host.innerHTML=""; }); }
+async function onBarcode(code){
+  await stopScanner();
+  scanStatus("Buscando producto… ("+code+")");
+  const round1=x=>x==null?0:Math.round(parseFloat(x)*10)/10;
+  let prod=null;
+  try{
+    const r=await fetch(`https://world.openfoodfacts.org/api/v2/product/${encodeURIComponent(code)}.json?fields=product_name,product_name_es,brands,nutriments`);
+    const j=await r.json();
+    if(j&&j.status===1&&j.product) prod=j.product;
+  }catch(e){ scanStatus("Error de conexión. Revisá internet y probá de nuevo."); scanActions('<button class="ctrl primary" data-action="scan-retry">Reintentar</button><button class="ctrl ghost" data-action="scan-close">Cerrar</button>'); return; }
+  if(!prod){ lastScanName=""; scanStatus("No encontramos ese código en Open Food Facts."); scanActions('<button class="ctrl primary" data-action="scan-retry">Escanear otro</button><button class="ctrl ghost" data-action="scan-manual">Cargarlo a mano</button>'); return; }
+  const n=prod.nutriments||{};
+  const name=prod.product_name_es||prod.product_name||(prod.brands?String(prod.brands).split(",")[0]:("Producto "+code));
+  const kcalRaw=n["energy-kcal_100g"];
+  if(kcalRaw==null){ lastScanName=name; scanStatus('"'+name+'" no tiene calorías cargadas en la base.'); scanActions('<button class="ctrl primary" data-action="scan-manual">Cargar datos a mano</button><button class="ctrl ghost" data-action="scan-retry">Escanear otro</button>'); return; }
+  const food={ name:name, kcal:Math.round(parseFloat(kcalRaw)), p:round1(n["proteins_100g"]), c:round1(n["carbohydrates_100g"]), f:round1(n["fat_100g"]), portion:100 };
+  closeScanner();
+  selectedFood=food; renderApp();
 }
 
 function renderApp(){
@@ -988,6 +1049,10 @@ document.body.addEventListener("click", e => {
     creatingFood=false; foodQuery=foodForm.name.trim(); save(); renderApp(); return;
   }
   if (a === "food-pick") { selectedFood = lastResults[parseInt(el.dataset.idx)]; renderApp(); return; }
+  if (a === "scan-open") { openScanner(); return; }
+  if (a === "scan-close") { closeScanner(); return; }
+  if (a === "scan-retry") { openScanner(); return; }
+  if (a === "scan-manual") { closeScanner(); creatingFood=true; selectedFood=null; editEntry=null; foodForm.name=lastScanName||""; foodForm.kcal=""; foodForm.p=""; foodForm.c=""; foodForm.f=""; renderApp(); return; }
   if (a === "portion-cancel") { selectedFood=null; editEntry=null; renderApp(); return; }
   if (a === "portion-add") {
     const g = parseFloat((document.getElementById("portionGrams")||{}).value); if(!(g>0)){ return; }
