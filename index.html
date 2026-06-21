@@ -280,6 +280,7 @@
   .scan-reader video { width: 100% !important; display: block; }
   .scan-reader img { display: none; }
   .scan-status { padding: 18px 22px 8px; color: var(--txt-2); font-size: 14px; text-align: center; line-height: 1.5; }
+  .scan-tip { padding: 0 22px 6px; color: var(--txt-3); font-size: 12px; text-align: center; line-height: 1.45; }
   .scan-actions { display: flex; flex-direction: column; gap: 10px; padding: 12px 22px 24px; }
   .scan-actions .ctrl { width: 100%; max-width: none; }
   .navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; justify-content: center;
@@ -906,7 +907,7 @@ function loadH5(){
 }
 function scanStatus(t){ const s=document.getElementById("scanStatus"); if(s) s.textContent=t; }
 function scanActions(html){ const a=document.getElementById("scanActions"); if(a) a.innerHTML=html||""; }
-function scanOverlayHTML(){ return `<div class="scan-overlay"><div class="scan-head"><span class="scan-title">Escanear código</span><button class="scan-x" data-action="scan-close">✕</button></div><div id="qrReader" class="scan-reader"></div><div class="scan-status" id="scanStatus">Iniciando cámara…</div><div class="scan-actions" id="scanActions"></div></div>`; }
+function scanOverlayHTML(){ return `<div class="scan-overlay"><div class="scan-head"><span class="scan-title">Escanear código</span><button class="scan-x" data-action="scan-close">✕</button></div><div id="qrReader" class="scan-reader"></div><div class="scan-status" id="scanStatus">Iniciando cámara…</div><div class="scan-tip">Tip: estirá el código si está arrugado, con buena luz y sin acercar de más.</div><div class="scan-actions" id="scanActions"></div></div>`; }
 async function openScanner(){
   const host=document.getElementById("scanHost"); if(!host) return;
   host.innerHTML=scanOverlayHTML();
@@ -915,10 +916,10 @@ async function openScanner(){
   const LIB=window.__Html5QrcodeLibrary__||{}; const H5=window.Html5Qrcode||LIB.Html5Qrcode; const FMT=window.Html5QrcodeSupportedFormats||LIB.Html5QrcodeSupportedFormats;
   if(!H5){ scanStatus("No se pudo iniciar el lector."); return; }
   let handled=false;
-  scanner=new H5("qrReader", FMT?{formatsToSupport:[FMT.EAN_13,FMT.EAN_8,FMT.UPC_A,FMT.UPC_E],verbose:false}:{verbose:false});
+  scanner=new H5("qrReader", FMT?{formatsToSupport:[FMT.EAN_13,FMT.EAN_8,FMT.UPC_A,FMT.UPC_E,FMT.CODE_128],experimentalFeatures:{useBarCodeDetectorIfSupported:true},verbose:false}:{experimentalFeatures:{useBarCodeDetectorIfSupported:true},verbose:false});
   scanStatus("Apuntá la cámara al código de barras…");
   try{
-    await scanner.start({facingMode:"environment"}, {fps:10, qrbox:(w)=>{ const ww=Math.max(160,Math.min(300,(w||300)-30)); return {width:ww,height:Math.round(ww*0.6)}; }}, (text)=>{ if(handled)return; handled=true; onBarcode(String(text)); }, ()=>{});
+    await scanner.start({facingMode:"environment",width:{ideal:1920},height:{ideal:1080}}, {fps:10, qrbox:(w)=>{ const ww=Math.max(220,Math.round((w||300)*0.92)); return {width:ww,height:Math.round(ww*0.55)}; }}, (text)=>{ if(handled)return; handled=true; onBarcode(String(text)); }, ()=>{});
   }catch(err){ scanStatus("No pudimos abrir la cámara. Dale permiso de cámara a Safari y volvé a intentar."); scanActions('<button class="ctrl primary" data-action="scan-retry">Reintentar</button><button class="ctrl ghost" data-action="scan-close">Cerrar</button>'); }
 }
 function stopScanner(){ return new Promise((res)=>{ if(!scanner){ res(); return; } const sc=scanner; scanner=null; try{ sc.stop().then(()=>{ try{sc.clear();}catch(e){} res(); }).catch(()=>{ res(); }); }catch(e){ res(); } }); }
