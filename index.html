@@ -231,7 +231,7 @@
   .ex-sheet { max-height: 82vh; display: flex; flex-direction: column; }
   .ex-search { width: 100%; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; color: var(--txt); font-size: 15px; margin-bottom: 12px; flex-shrink: 0; }
   .ex-search:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
-  .ex-chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: none; flex-shrink: 0; align-items: center; }
+  .ex-chips { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 12px; flex-shrink: 0; align-items: center; }
   .ex-chips::-webkit-scrollbar { display: none; }
   .ex-chip { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 999px; background: var(--card-2); border: 1px solid var(--border); color: var(--txt-2); font-size: 13px; line-height: 1.2; white-space: nowrap; flex-shrink: 0; cursor: pointer; }
   .ex-chip.on { background: var(--blue); color: #fff; border-color: var(--blue); }
@@ -387,17 +387,18 @@ const FOODS_RAW = [
 ];
 const FOODS = FOODS_RAW.map(a=>({name:a[0],kcal:a[1],p:a[2],c:a[3],f:a[4],portion:a[5]}));
 
-const EX_CATS = [["pecho","Pecho"],["espalda","Espalda"],["hombros","Hombros"],["biceps","Bíceps"],["triceps","Tríceps"],["piernas","Piernas"],["gemelos","Gemelos"],["abs","Abdominales"],["antebrazo","Antebrazo"]];
+const EX_CATS = [["pecho","Pecho"],["espalda","Espalda"],["hombros","Hombros"],["biceps","Bíceps"],["triceps","Tríceps"],["piernas","Piernas"],["gemelos","Gemelos"],["abs","Abdominales"],["antebrazo","Antebrazo"],["cuello","Cuello"]];
 const EX_DB = {
   pecho:["Press de banca plano (barra)","Press de banca inclinado (barra)","Press de banca declinado","Press plano con mancuernas","Press inclinado con mancuernas","Press plano en Smith","Press inclinado en Smith","Aperturas con mancuernas","Aperturas inclinadas","Pec Deck","Cruce de poleas","Vuelos en polea","Fondos en paralelas","Flexiones de brazos","Chest Press (máquina)"],
   espalda:["Dominadas","Dominadas neutras","Jalón al pecho","Jalón neutro","Jalón en V","Remo con barra","Remo Pendlay","Remo unilateral con mancuerna","Remo en máquina","Remo en polea baja","T-Bar Row","Remo Hammer","Pullover en polea","Pullover con mancuerna","Hiperextensiones lumbares"],
-  hombros:["Press militar (barra)","Press Arnold","Press de hombros con mancuernas","Press de hombros en Smith","Vuelos laterales con mancuernas","Vuelos laterales en polea","Vuelos laterales en máquina","Vuelos posteriores","Posterior en Pec Deck","Elevaciones frontales","Face Pull","Encogimientos (shrugs)"],
+  hombros:["Press militar (barra)","Press Arnold","Press de hombros con mancuernas","Press de hombros en Smith","Vuelos laterales con mancuernas","Vuelos laterales en polea","Vuelos laterales en máquina","Vuelos posteriores","Posterior en Pec Deck","Posterior en polea","Elevaciones frontales","Face Pull","Encogimientos (shrugs)"],
   biceps:["Curl con barra","Curl con barra Z","Curl con mancuernas","Curl alternado","Curl martillo","Curl predicador (Scott)","Curl en banco inclinado","Curl en polea","Curl Bayesian","Curl concentrado","Curl araña"],
   triceps:["Press francés (barra)","Press francés con mancuernas","Extensión en polea","Extensión con soga","Patada de tríceps","Press cerrado","Fondos entre bancos","Extensión sobre la cabeza","Katana en polea","Katana en Smith","Fondos en paralelas"],
   piernas:["Sentadilla libre","Sentadilla en Smith","Hack Squat","Prensa 45","Extensión de cuádriceps","Curl femoral acostado","Curl femoral sentado","Peso muerto rumano (RDL)","Peso muerto convencional","Peso muerto sumo","Hip Thrust","Zancadas","Búlgaras","Aductores","Abductores","Patada de glúteo en polea","Sentadilla goblet","Step Up"],
-  gemelos:["Gemelos de pie","Gemelos sentado","Gemelos en prensa","Gemelos en Smith"],
-  abs:["Crunch","Crunch declinado","Elevación de piernas","Elevación de piernas colgado","Plancha","Rueda abdominal","Crunch en polea","Russian Twist","Mountain Climbers","Oblicuos"],
-  antebrazo:["Curl de muñeca","Curl de muñeca invertido","Curl Reverse con barra","Farmer Walk","Curl de antebrazo en polea"]
+  gemelos:["Gemelos de pie","Gemelos sentado","Gemelos en prensa","Gemelos en Smith","Gemelos burro (donkey)","Gemelos a una pierna","Gemelos en máquina"],
+  abs:["Crunch","Crunch declinado","Elevación de piernas","Elevación de piernas colgado","Plancha","Rueda abdominal","Crunch en polea","Russian Twist","Mountain Climbers","Oblicuos","Plancha lateral","Crunch invertido","Bicicleta abdominal","Toes to bar","Hollow hold","Dead bug","Leñador en polea","Crunch en máquina","Dragon flag","V-ups"],
+  antebrazo:["Curl de muñeca","Curl de muñeca invertido","Curl Reverse con barra","Farmer Walk","Curl de antebrazo en polea","Curl de muñeca con mancuerna","Curl Zottman","Wrist roller (enrollador)","Dead hang (colgarse)","Plate pinch","Grippers de mano"],
+  cuello:["Flexión de cuello con disco","Extensión de cuello con disco","Flexión lateral de cuello","Neck curl con arnés","Puente de cuello (lucha)","Rotaciones de cuello"]
 };
 
 const DEFAULT = {
@@ -858,7 +859,7 @@ function renderWChart(ws){
 }
 function muscleOf(name){ const n=(name||"").trim().toLowerCase(); for(const cat in EX_DB){ if(EX_DB[cat].some(x=>x.toLowerCase()===n)) return cat; } return "otros"; }
 function renderVolumen(){
-  const labels={pecho:"Pecho",espalda:"Espalda",hombros:"Hombros",biceps:"Bíceps",triceps:"Tríceps",piernas:"Piernas",gemelos:"Gemelos",abs:"Abdominales",antebrazo:"Antebrazo",otros:"Otros"};
+  const labels={pecho:"Pecho",espalda:"Espalda",hombros:"Hombros",biceps:"Bíceps",triceps:"Tríceps",piernas:"Piernas",gemelos:"Gemelos",abs:"Abdominales",antebrazo:"Antebrazo",cuello:"Cuello",otros:"Otros"};
   const tally={};
   (state.days||[]).forEach(d=>{ (d.exercises||[]).forEach(ex=>{ const m=muscleOf(ex.name); const sets=(ex.sets||[]).length; tally[m]=(tally[m]||0)+sets; }); });
   const rows=Object.keys(tally).filter(k=>tally[k]>0).map(k=>({label:labels[k]||k,sets:tally[k]})).sort((a,b)=>b.sets-a.sets);
