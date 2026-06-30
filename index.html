@@ -9,33 +9,33 @@
 <meta name="apple-mobile-web-app-title" content="J-FIT">
 <meta name="theme-color" content="#060911">
 <title>J-FIT</title>
-<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="%233b82f6"/><g stroke="white" stroke-width="2.3" stroke-linecap="round" fill="none"><path d="M9 9v14M6 12v8M23 9v14M26 12v8M9 16h14"/></g></svg>'>
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="3" fill="%23f97316"/><g stroke="white" stroke-width="2.3" stroke-linecap="round" fill="none"><path d="M9 9v14M6 12v8M23 9v14M26 12v8M9 16h14"/></g></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   :root {
-    --bg: #060911; --card: #0e1526; --card-2: #131c33; --border: #1d2742;
-    --txt: #f2f6ff; --txt-2: #8d99b8; --txt-3: #586087;
-    --blue: #3b82f6; --blue-2: #5b9dff; --red: #f87171;
-    --glow: rgba(59,130,246,.5);
+    --bg: #000000; --card: #0c0c0c; --card-2: #171717; --border: #2a2a2a;
+    --txt: #fafafa; --txt-2: #9a9a9a; --txt-3: #5c5c5c;
+    --blue: #f97316; --blue-2: #ff9a4d; --red: #f87171;
+    --glow: rgba(249,115,22,.3);
   }
   html, body { background: var(--bg); color: var(--txt); }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif; min-height: 100vh; overflow-x: hidden; }
   body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background: radial-gradient(720px circle at 50% -6%, rgba(59,130,246,.16), transparent 55%); }
+    background: radial-gradient(720px circle at 50% -6%, rgba(249,115,22,.06), transparent 55%); }
 
   .topbar { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between;
     max-width: 540px; margin: 0 auto; padding: calc(16px + env(safe-area-inset-top)) 16px 6px; }
   .brand { display: flex; align-items: center; gap: 11px; }
-  .brand-ic { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #2563eb, #4f9bff);
+  .brand-ic { width: 40px; height: 40px; border-radius: 4px; background: linear-gradient(135deg, #dd6411, #ff9a4d);
     display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px var(--glow), inset 0 1px 0 rgba(255,255,255,.3); }
   .brand-ic svg { width: 22px; height: 22px; color: #fff; }
   .wordmark { font-family: "Orbitron", system-ui, sans-serif; font-weight: 800; font-size: 23px; letter-spacing: .02em; line-height: 1; }
-  .wordmark .b { color: var(--blue-2); text-shadow: 0 0 16px rgba(91,157,255,.6); }
+  .wordmark .b { color: var(--blue-2); text-shadow: 0 0 16px rgba(255,154,77,.6); }
   .wordmark .w { color: #fff; }
-  .top-btn { width: 38px; height: 38px; border-radius: 11px; background: var(--card); border: 1px solid var(--border);
+  .top-btn { width: 38px; height: 38px; border-radius: 4px; background: var(--card); border: 1px solid var(--border);
     color: var(--txt-2); display: flex; align-items: center; justify-content: center; cursor: pointer; }
   .top-btn svg { width: 18px; height: 18px; }
   .top-btn:active { color: var(--txt); }
@@ -44,7 +44,7 @@
 
   .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
   .tabs::-webkit-scrollbar { display: none; }
-  .tab { padding: 8px 16px; border-radius: 999px; font-size: 14px; white-space: nowrap; flex-shrink: 0;
+  .tab { padding: 8px 16px; border-radius: 4px; font-size: 14px; white-space: nowrap; flex-shrink: 0;
     background: var(--card); border: 1px solid var(--border); color: var(--txt-2); cursor: pointer; transition: .15s; }
   .tab.active { background: var(--blue); color: #fff; font-weight: 600; border-color: var(--blue); box-shadow: 0 0 16px var(--glow); }
   .tab-add { color: var(--blue-2); font-weight: 700; border-style: dashed; }
@@ -52,24 +52,24 @@
   .day-head { margin: 16px 0 20px; }
   .day-top { display: flex; align-items: center; gap: 8px; }
   .day-name { flex: 1; min-width: 0; background: transparent; border: none; color: var(--txt);
-    font-size: 26px; font-weight: 700; letter-spacing: -0.02em; padding: 2px 4px; border-radius: 8px; }
+    font-size: 26px; font-weight: 700; letter-spacing: -0.02em; padding: 2px 4px; border-radius: 4px; }
   .day-name:focus { outline: none; background: var(--card); }
   .day-del { background: none; border: none; color: var(--txt-3); cursor: pointer; flex-shrink: 0; padding: 6px; }
   .day-del svg { width: 18px; height: 18px; }
   .day-del:active { color: var(--red); }
-  .day-sub { width: 100%; background: transparent; border: none; color: var(--txt-2); font-size: 14px; padding: 2px 4px; border-radius: 8px; margin-top: 2px; }
+  .day-sub { width: 100%; background: transparent; border: none; color: var(--txt-2); font-size: 14px; padding: 2px 4px; border-radius: 4px; margin-top: 2px; }
   .day-sub:focus { outline: none; background: var(--card); }
 
   .progress-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
-  .bar { flex: 1; height: 8px; border-radius: 999px; background: var(--card-2); overflow: hidden; }
-  .bar > div { height: 100%; background: linear-gradient(90deg, #2563eb, #4f9bff); box-shadow: 0 0 10px var(--glow); transition: width .25s; }
+  .bar { flex: 1; height: 8px; border-radius: 4px; background: var(--card-2); overflow: hidden; }
+  .bar > div { height: 100%; background: linear-gradient(90deg, #dd6411, #ff9a4d); box-shadow: 0 0 10px var(--glow); transition: width .25s; }
   .count { font-size: 14px; color: var(--txt-2); font-variant-numeric: tabular-nums; flex-shrink: 0; }
   .clear { font-size: 12px; color: var(--txt-3); background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; flex-shrink: 0; }
   .clear:active { color: var(--txt); }
 
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 16px; margin-bottom: 12px; }
   .card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-  .ex-name { flex: 1; min-width: 0; background: transparent; border: none; color: var(--txt); font-size: 16px; font-weight: 600; padding: 2px 4px; border-radius: 8px; }
+  .ex-name { flex: 1; min-width: 0; background: transparent; border: none; color: var(--txt); font-size: 16px; font-weight: 600; padding: 2px 4px; border-radius: 4px; }
   .ex-name:focus { outline: none; background: var(--card-2); }
   .ex-count { font-size: 12px; color: var(--txt-3); font-variant-numeric: tabular-nums; flex-shrink: 0; }
   .trash { background: none; border: none; color: var(--txt-3); cursor: pointer; flex-shrink: 0; padding: 2px; }
@@ -77,15 +77,15 @@
   .trash:active { color: var(--red); }
 
   .set { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-  .idx { width: 24px; height: 24px; border-radius: 7px; background: var(--card-2); color: var(--txt-2); font-size: 12px; font-family: monospace;
+  .idx { width: 24px; height: 24px; border-radius: 4px; background: var(--card-2); color: var(--txt-2); font-size: 12px; font-family: monospace;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .field { display: flex; align-items: center; gap: 4px; }
-  .field input { background: var(--card-2); border: 1px solid var(--border); border-radius: 8px; padding: 7px 8px; text-align: right;
+  .field input { background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 7px 8px; text-align: right;
     font-variant-numeric: tabular-nums; color: var(--txt); font-size: 14px; }
-  .field input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+  .field input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(249,115,22,.15); }
   .kg { width: 62px; } .reps { width: 52px; }
   .unit { font-size: 12px; color: var(--txt-3); }
-  .done { width: 36px; height: 36px; border-radius: 9px; border: 1px solid #2f3b5c; background: transparent; color: var(--txt-3);
+  .done { width: 36px; height: 36px; border-radius: 4px; border: 1px solid #3a3a3a; background: transparent; color: var(--txt-3);
     display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: .15s; }
   .done svg { width: 18px; height: 18px; }
   .done.on { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 0 12px var(--glow); }
@@ -93,21 +93,21 @@
   .rm:active { color: var(--red); }
 
   .add-set { margin-top: 12px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px;
-    color: var(--blue-2); background: transparent; cursor: pointer; border: 1px dashed #2f3b5c; border-radius: 9px; padding: 9px; }
+    color: var(--blue-2); background: transparent; cursor: pointer; border: 1px dashed #3a3a3a; border-radius: 4px; padding: 9px; }
   .add-set:active { border-color: var(--blue); }
   .add-ex { margin-top: 16px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px;
-    font-weight: 600; color: var(--txt); background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px; cursor: pointer; }
-  .add-ex:active { border-color: #2f3b5c; }
+    font-weight: 600; color: var(--txt); background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px; cursor: pointer; }
+  .add-ex:active { border-color: #3a3a3a; }
   .foot { text-align: center; font-size: 12px; color: var(--txt-3); margin-top: 24px; }
 
   /* Hábitos */
   .hb-head { margin: 6px 0 20px; }
   .hb-title { font-size: 25px; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
-  .title-accent { width: 44px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #2563eb, #4f9bff); box-shadow: 0 0 10px var(--glow); margin: 9px 0 2px; }
+  .title-accent { width: 44px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #dd6411, #ff9a4d); box-shadow: 0 0 10px var(--glow); margin: 9px 0 2px; }
   .hb-list { display: flex; flex-direction: column; gap: 10px; }
-  .hb-item { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: .15s; }
+  .hb-item { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; cursor: pointer; transition: .15s; }
   .hb-item:active { background: var(--card-2); }
-  .hb-check { width: 26px; height: 26px; border-radius: 8px; border: 1.5px solid #2f3b5c; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; transition: .15s; }
+  .hb-check { width: 26px; height: 26px; border-radius: 4px; border: 1.5px solid #3a3a3a; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; transition: .15s; }
   .hb-check.on { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 12px var(--glow); }
   .hb-check svg { width: 16px; height: 16px; }
   .hb-name { flex: 1; font-size: 15px; font-weight: 500; }
@@ -115,34 +115,34 @@
   .hb-rm { background: none; border: none; color: var(--txt-3); font-size: 15px; cursor: pointer; flex-shrink: 0; padding: 4px; }
   .hb-rm:active { color: var(--red); }
   .hb-add { display: flex; gap: 8px; margin-top: 16px; }
-  .hb-add input { flex: 1; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 13px 14px; color: var(--txt); font-size: 15px; }
-  .hb-add input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
-  .hb-add-btn { width: 48px; border: none; border-radius: 12px; background: var(--blue); color: #fff; font-size: 24px; cursor: pointer; box-shadow: 0 0 16px var(--glow); }
+  .hb-add input { flex: 1; background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 13px 14px; color: var(--txt); font-size: 15px; }
+  .hb-add input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(249,115,22,.15); }
+  .hb-add-btn { width: 48px; border: none; border-radius: 4px; background: var(--blue); color: #fff; font-size: 24px; cursor: pointer; box-shadow: 0 0 16px var(--glow); }
   .hb-add-btn:active { filter: brightness(1.12); }
   .empty { color: var(--txt-3); text-align: center; padding: 28px 16px; font-size: 14px; line-height: 1.6; }
 
   /* Cardio */
   .cardio-modes { display: flex; gap: 8px; margin: 8px 0 8px; }
-  .cmode { flex: 1; padding: 11px; border-radius: 12px; background: var(--card); border: 1px solid var(--border); color: var(--txt-2); font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; }
+  .cmode { flex: 1; padding: 11px; border-radius: 4px; background: var(--card); border: 1px solid var(--border); color: var(--txt-2); font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; }
   .cmode.active { background: var(--blue); color: #fff; border-color: var(--blue); box-shadow: 0 0 14px var(--glow); }
-  .time-display { font-family: "Orbitron", monospace; font-size: 62px; font-weight: 800; text-align: center; letter-spacing: .02em; margin: 26px 0; color: #fff; text-shadow: 0 0 26px rgba(91,157,255,.4); font-variant-numeric: tabular-nums; }
+  .time-display { font-family: "Orbitron", monospace; font-size: 62px; font-weight: 800; text-align: center; letter-spacing: .02em; margin: 26px 0; color: #fff; text-shadow: 0 0 26px rgba(255,154,77,.4); font-variant-numeric: tabular-nums; }
   .time-display.finished { color: var(--blue-2); animation: pulse 1s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.35;} }
   .ctrl-row { display: flex; gap: 10px; justify-content: center; margin-top: 6px; }
-  .ctrl { flex: 1; max-width: 160px; padding: 15px; border-radius: 14px; border: none; font-size: 15px; font-weight: 600; cursor: pointer; }
+  .ctrl { flex: 1; max-width: 160px; padding: 15px; border-radius: 4px; border: none; font-size: 15px; font-weight: 600; cursor: pointer; }
   .ctrl.primary { background: var(--blue); color: #fff; box-shadow: 0 0 18px var(--glow); }
   .ctrl.ghost { background: var(--card); color: var(--txt); border: 1px solid var(--border); }
   .ctrl:active { filter: brightness(1.1); }
   .presets { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 18px; }
-  .preset { padding: 9px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); color: var(--txt-2); font-size: 13px; cursor: pointer; font-variant-numeric: tabular-nums; }
+  .preset { padding: 9px 14px; border-radius: 4px; background: var(--card); border: 1px solid var(--border); color: var(--txt-2); font-size: 13px; cursor: pointer; font-variant-numeric: tabular-nums; }
   .preset.on { border-color: var(--blue); color: var(--blue-2); }
   .custom-time { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 6px; }
-  .ct-input { width: 74px; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 13px; text-align: center; color: var(--txt); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .ct-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+  .ct-input { width: 74px; background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 13px; text-align: center; color: var(--txt); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ct-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(249,115,22,.15); }
   .ct-colon { font-size: 24px; font-weight: 700; color: var(--txt-2); }
   .ct-hint { text-align: center; font-size: 12px; color: var(--txt-3); margin-bottom: 22px; }
   .laps { margin-top: 26px; display: flex; flex-direction: column; gap: 6px; }
-  .lap { display: flex; justify-content: space-between; padding: 11px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-variant-numeric: tabular-nums; font-size: 14px; }
+  .lap { display: flex; justify-content: space-between; padding: 11px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; font-variant-numeric: tabular-nums; font-size: 14px; }
   .lap span:first-child { color: var(--txt-2); }
 
   /* Comida / Calorías */
@@ -161,22 +161,22 @@
   .macro-top b { color: var(--txt); font-weight: 600; }
   .macro-top span { color: var(--txt-2); font-variant-numeric: tabular-nums; }
   .cal-edit { display: block; margin: 0 auto 22px; background: none; border: none; color: var(--blue-2); font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
-  .cal-search input { width: 100%; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 13px 14px; color: var(--txt); font-size: 15px; }
-  .cal-search input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+  .cal-search input { width: 100%; background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 13px 14px; color: var(--txt); font-size: 15px; }
+  .cal-search input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(249,115,22,.15); }
   #foodResults { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
-  .food-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; cursor: pointer; }
+  .food-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 11px 14px; cursor: pointer; }
   .food-row:active { background: var(--card-2); }
   .food-name { font-size: 14px; }
   .food-kcal { font-size: 13px; color: var(--blue-2); font-variant-numeric: tabular-nums; display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; }
   .food-kcal span { font-size: 10px; color: var(--txt-3); }
   .cal-hint { color: var(--txt-3); font-size: 13px; text-align: center; padding: 14px; }
   .cal-create { margin: 10px 0 20px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px;
-    color: var(--blue-2); background: transparent; cursor: pointer; border: 1px dashed #2f3b5c; border-radius: 10px; padding: 11px; }
+    color: var(--blue-2); background: transparent; cursor: pointer; border: 1px dashed #3a3a3a; border-radius: 4px; padding: 11px; }
   .cal-create:active { border-color: var(--blue); }
   .diary-head { display: flex; align-items: center; justify-content: space-between; margin: 4px 0 12px; }
   .diary-head .t { font-size: 17px; font-weight: 700; }
   .diary-head .s { font-size: 13px; color: var(--txt-2); font-variant-numeric: tabular-nums; }
-  .diary-item { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; transition: .15s; }
+  .diary-item { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; transition: .15s; }
   .diary-item:active { background: var(--card-2); }
   .diary-name { flex: 1; min-width: 0; font-size: 14px; }
   .diary-name span { display: block; font-size: 12px; color: var(--txt-3); margin-top: 2px; }
@@ -184,19 +184,19 @@
   .diary-rm { background: none; border: none; color: var(--txt-3); font-size: 15px; cursor: pointer; flex-shrink: 0; padding: 4px; }
   .diary-rm:active { color: var(--red); }
   .cal-empty { text-align: center; padding: 40px 20px; }
-  .cal-empty-ic { width: 60px; height: 60px; border-radius: 16px; background: var(--card-2); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: var(--blue-2); }
+  .cal-empty-ic { width: 60px; height: 60px; border-radius: 4px; background: var(--card-2); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: var(--blue-2); }
   .cal-empty-ic svg { width: 30px; height: 30px; }
   .cal-empty-title { font-size: 21px; font-weight: 700; margin-bottom: 8px; }
   .cal-empty-sub { color: var(--txt-2); font-size: 14px; line-height: 1.6; margin-bottom: 22px; }
 
   .sheet-bg { position: fixed; inset: 0; z-index: 59; background: rgba(0,0,0,.55); }
   .sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; max-width: 540px; margin: 0 auto;
-    background: var(--card); border: 1px solid var(--border); border-bottom: none; border-radius: 20px 20px 0 0;
+    background: var(--card); border: 1px solid var(--border); border-bottom: none; border-radius: 4px 4px 0 0;
     padding: 22px 18px calc(20px + env(safe-area-inset-bottom)); box-shadow: 0 -12px 40px rgba(0,0,0,.6); }
   .sheet-title { font-size: 19px; font-weight: 700; margin-bottom: 16px; }
   .sheet-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
-  .sheet-input { width: 110px; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 13px; text-align: center; color: var(--txt); font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .sheet-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+  .sheet-input { width: 110px; background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 13px; text-align: center; color: var(--txt); font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .sheet-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(249,115,22,.15); }
   .sheet-unit { font-size: 15px; color: var(--txt-2); }
   .sheet-preview { color: var(--blue-2); font-size: 14px; font-variant-numeric: tabular-nums; margin-bottom: 18px; }
   .sheet-btns { display: flex; gap: 10px; }
@@ -209,18 +209,18 @@
   .form-group { margin-bottom: 18px; }
   .form-label { font-size: 13px; color: var(--txt-2); margin-bottom: 9px; display: block; }
   .seg { display: flex; flex-wrap: wrap; gap: 8px; }
-  .seg button { padding: 11px 15px; border-radius: 10px; background: var(--card); border: 1px solid var(--border); color: var(--txt-2); font-size: 13px; font-weight: 600; cursor: pointer; }
+  .seg button { padding: 11px 15px; border-radius: 4px; background: var(--card); border: 1px solid var(--border); color: var(--txt-2); font-size: 13px; font-weight: 600; cursor: pointer; }
   .seg button.on { background: var(--blue); color: #fff; border-color: var(--blue); box-shadow: 0 0 12px var(--glow); }
-  .form-input { width: 100%; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 13px 14px; color: var(--txt); font-size: 16px; }
-  .form-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+  .form-input { width: 100%; background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 13px 14px; color: var(--txt); font-size: 16px; }
+  .form-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(249,115,22,.15); }
   .form-row2 { display: flex; gap: 10px; }
   .form-row2 .form-group { flex: 1; }
-  .form-save { margin-top: 6px; width: 100%; padding: 15px; border-radius: 14px; border: none; background: var(--blue); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 0 18px var(--glow); }
+  .form-save { margin-top: 6px; width: 100%; padding: 15px; border-radius: 4px; border: none; background: var(--blue); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 0 18px var(--glow); }
   .form-save:active { filter: brightness(1.1); }
   .form-or { text-align: center; color: var(--txt-3); font-size: 12px; margin: 22px 0 12px; }
 
   .step-quick { display: flex; gap: 8px; margin-bottom: 12px; }
-  .qbtn { flex: 1; padding: 13px; border-radius: 12px; background: var(--card); border: 1px solid var(--border); color: var(--txt); font-size: 14px; font-weight: 600; cursor: pointer; }
+  .qbtn { flex: 1; padding: 13px; border-radius: 4px; background: var(--card); border: 1px solid var(--border); color: var(--txt); font-size: 14px; font-weight: 600; cursor: pointer; }
   .qbtn:active { border-color: var(--blue); }
   .step-set { display: flex; gap: 8px; margin-bottom: 14px; }
   .step-set .form-input { flex: 1; }
@@ -229,29 +229,29 @@
   .icon-mini svg { width: 17px; height: 17px; }
   .icon-mini:active { color: var(--blue-2); }
   .ex-sheet { max-height: 82vh; display: flex; flex-direction: column; }
-  .ex-search { width: 100%; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; color: var(--txt); font-size: 15px; margin-bottom: 12px; flex-shrink: 0; }
-  .ex-search:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+  .ex-search { width: 100%; background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 12px 14px; color: var(--txt); font-size: 15px; margin-bottom: 12px; flex-shrink: 0; }
+  .ex-search:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(249,115,22,.15); }
   .ex-chips { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 12px; flex-shrink: 0; align-items: center; }
   .ex-chips::-webkit-scrollbar { display: none; }
-  .ex-chip { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 999px; background: var(--card-2); border: 1px solid var(--border); color: var(--txt-2); font-size: 13px; line-height: 1.2; white-space: nowrap; flex-shrink: 0; cursor: pointer; }
+  .ex-chip { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 4px; background: var(--card-2); border: 1px solid var(--border); color: var(--txt-2); font-size: 13px; line-height: 1.2; white-space: nowrap; flex-shrink: 0; cursor: pointer; }
   .ex-chip.on { background: var(--blue); color: #fff; border-color: var(--blue); }
   .ex-list { overflow-y: auto; display: flex; flex-direction: column; gap: 6px; flex: 1; min-height: 100px; }
-  .ex-pick { text-align: left; background: var(--card-2); border: 1px solid var(--border); border-radius: 10px; padding: 13px 14px; color: var(--txt); font-size: 14px; cursor: pointer; }
+  .ex-pick { text-align: left; background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 13px 14px; color: var(--txt); font-size: 14px; cursor: pointer; }
   .ex-pick:active { border-color: var(--blue); }
-  .ex-custom { text-align: left; background: transparent; border: 1px dashed #2f3b5c; border-radius: 10px; padding: 12px 14px; color: var(--blue-2); font-size: 14px; cursor: pointer; margin-top: 8px; flex-shrink: 0; }
+  .ex-custom { text-align: left; background: transparent; border: 1px dashed #3a3a3a; border-radius: 4px; padding: 12px 14px; color: var(--blue-2); font-size: 14px; cursor: pointer; margin-top: 8px; flex-shrink: 0; }
   .w-current { text-align: center; margin: 6px 0 14px; }
   .w-now { font-family: "Orbitron", monospace; font-size: 42px; font-weight: 800; color: #fff; }
   .w-now small { font-size: 18px; color: var(--txt-2); }
   .w-meta { font-size: 13px; color: var(--txt-2); margin-top: 4px; }
   .w-delta { color: var(--blue-2); font-weight: 600; margin-left: 4px; }
-  .w-chart { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px 8px; margin-bottom: 18px; }
+  .w-chart { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 12px 8px; margin-bottom: 18px; }
   .w-form { display: flex; gap: 8px; margin-bottom: 18px; }
   .w-list-head { font-size: 13px; color: var(--txt-2); margin-bottom: 10px; font-weight: 600; }
-  .w-item { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 13px 14px; margin-bottom: 8px; cursor: pointer; transition: .15s; }
+  .w-item { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 13px 14px; margin-bottom: 8px; cursor: pointer; transition: .15s; }
   .w-item:active { background: var(--card-2); }
   .w-date { flex: 1; font-size: 14px; color: var(--txt); }
   .w-kg { font-size: 14px; font-weight: 600; color: var(--txt); font-variant-numeric: tabular-nums; }
-  .water-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 14px; }
+  .water-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px; margin-bottom: 14px; }
   .water-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
   .water-ttl { font-size: 14px; font-weight: 600; color: var(--txt); }
   .water-val { font-size: 13px; color: var(--blue-2); font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -260,22 +260,22 @@
   .water-undo { color: var(--txt-2) !important; }
   .water-goal { background: none; border: none; color: var(--txt-3); font-size: 12px; margin-top: 10px; cursor: pointer; text-decoration: underline; padding: 4px 0 0; }
   .vol-sub { font-size: 13px; color: var(--txt-2); margin-bottom: 12px; }
-  .vol-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px; }
+  .vol-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px; }
   .vol-row { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
   .vol-row:last-child { margin-bottom: 0; }
   .vol-lbl { width: 92px; font-size: 13px; color: var(--txt); flex-shrink: 0; }
-  .vol-bar { flex: 1; height: 9px; background: var(--card-2); border-radius: 999px; overflow: hidden; }
-  .vol-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue-2)); border-radius: 999px; }
+  .vol-bar { flex: 1; height: 9px; background: var(--card-2); border-radius: 4px; overflow: hidden; }
+  .vol-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue-2)); border-radius: 4px; }
   .vol-n { width: 26px; text-align: right; font-size: 13px; font-weight: 600; color: var(--txt); font-variant-numeric: tabular-nums; flex-shrink: 0; }
-  .date-field { position: relative; display: flex; align-items: center; background: var(--card-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .date-field { position: relative; display: flex; align-items: center; background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 12px 14px; }
   .date-disp { font-size: 15px; color: var(--txt); font-variant-numeric: tabular-nums; }
   .date-native { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; border: none; background: none; margin: 0; padding: 0; }
-  .scan-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(180deg, #15233f, #101a30); border: 1px solid #2a3a5e; color: var(--blue-2); font-size: 14px; font-weight: 600; padding: 13px; border-radius: 12px; cursor: pointer; margin-bottom: 14px; }
+  .scan-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(180deg, #15233f, #101a30); border: 1px solid #2a3a5e; color: var(--blue-2); font-size: 14px; font-weight: 600; padding: 13px; border-radius: 4px; cursor: pointer; margin-bottom: 14px; }
   .scan-btn:active { background: #0d1525; }
   .scan-overlay { position: fixed; inset: 0; z-index: 1000; background: #05080f; display: flex; flex-direction: column; overflow-y: auto; }
   .scan-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; padding-top: max(16px, env(safe-area-inset-top)); flex-shrink: 0; }
   .scan-title { font-size: 17px; font-weight: 700; color: #fff; }
-  .scan-x { background: rgba(255,255,255,.08); border: none; color: #fff; width: 34px; height: 34px; border-radius: 50%; font-size: 15px; cursor: pointer; flex-shrink: 0; }
+  .scan-x { background: rgba(255,255,255,.08); border: none; color: #fff; width: 34px; height: 34px; border-radius: 4px; font-size: 15px; cursor: pointer; flex-shrink: 0; }
   .scan-reader { width: 100%; background: #000; overflow: hidden; min-height: 240px; }
   .scan-reader video { width: 100% !important; display: block; }
   .scan-reader img { display: none; }
@@ -284,25 +284,36 @@
   .scan-actions { display: flex; flex-direction: column; gap: 10px; padding: 12px 22px 24px; }
   .scan-actions .ctrl { width: 100%; max-width: none; }
   #restBar { display:none; position: fixed; left:0; right:0; bottom: calc(74px + env(safe-area-inset-bottom)); z-index: 55; max-width: 540px; margin: 0 auto; padding: 0 12px; }
-  .rest-inner { position: relative; overflow: hidden; display:flex; align-items:center; gap:10px; background: var(--card-2); border:1px solid var(--blue); border-radius: 14px; padding: 11px 12px; box-shadow: 0 6px 24px rgba(0,0,0,.45), 0 0 16px var(--glow); }
+  .rest-inner { position: relative; overflow: hidden; display:flex; align-items:center; gap:10px; background: var(--card-2); border:1px solid var(--blue); border-radius: 4px; padding: 11px 12px; box-shadow: 0 6px 24px rgba(0,0,0,.45), 0 0 16px var(--glow); }
   .rest-lbl { font-size: 12px; color: var(--txt-2); }
   .rest-time { font-family:"Orbitron",monospace; font-size: 20px; font-weight: 800; color:#fff; min-width: 52px; }
   .rest-opts { display:flex; gap:5px; margin-left:auto; }
-  .rest-opt { padding: 6px 9px; border-radius: 8px; background: var(--card); border:1px solid var(--border); color: var(--txt-2); font-size: 12px; font-weight:600; cursor:pointer; }
+  .rest-opt { padding: 6px 9px; border-radius: 4px; background: var(--card); border:1px solid var(--border); color: var(--txt-2); font-size: 12px; font-weight:600; cursor:pointer; }
   .rest-opt.on { background: var(--blue); color:#fff; border-color: var(--blue); }
   .rest-x { background:none; border:none; color: var(--txt-3); font-size:16px; cursor:pointer; padding:4px 6px; }
   .rest-prog-track { position:absolute; left:0; right:0; bottom:0; height:3px; }
   .rest-prog { height:100%; background: var(--blue-2); transition: width 1s linear; }
   .rest-done { justify-content: space-between; border-color: var(--blue-2); }
   .rest-msg { font-size: 14px; font-weight:600; color:#fff; }
-  .rest-play { margin-left:auto; width:40px; height:40px; border-radius:50%; background: var(--blue); border:none; color:#fff; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .rest-play { margin-left:auto; width:40px; height:40px; border-radius:4px; background: var(--blue); border:none; color:#fff; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
   .rest-idle .rest-opts { margin-left: 10px; }
+  .save-session { width:100%; margin-top:14px; padding:14px; border-radius:4px; border:none; background:var(--blue); color:#fff; font-size:15px; font-weight:700; cursor:pointer; }
+  .save-session:active { background:var(--blue-2); }
+  .load-sel { margin-bottom:6px; }
+  .load-cap { font-size:12px; color:var(--txt-2); margin:0 2px 12px; }
+  .sess-item { display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:4px; padding:12px 14px; margin-bottom:8px; }
+  .sess-main { flex:1; min-width:0; }
+  .sess-date { font-size:13px; color:var(--txt); font-weight:600; }
+  .sess-n { color:var(--txt-3); font-weight:400; font-size:12px; }
+  .sess-exs { font-size:12px; color:var(--txt-2); margin-top:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .reset-routine { display:block; margin:16px auto 0; background:none; border:1px solid var(--border); color:var(--txt-2); font-size:12px; padding:9px 16px; border-radius:4px; cursor:pointer; }
+  .reset-routine:active { background:var(--card-2); }
   .navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; justify-content: center;
     padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: rgba(6,9,17,.82);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--border); }
   .nav-inner { display: flex; gap: 2px; width: 100%; max-width: 540px; }
   .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0; border: none; background: none;
-    color: var(--txt-3); font-size: 11px; font-weight: 600; cursor: pointer; border-radius: 12px; transition: .15s; }
+    color: var(--txt-3); font-size: 11px; font-weight: 600; cursor: pointer; border-radius: 4px; transition: .15s; }
   .nav-item svg { width: 22px; height: 22px; }
   .nav-item.active { color: var(--blue-2); }
   .nav-item.active svg { filter: drop-shadow(0 0 6px var(--glow)); }
@@ -436,21 +447,19 @@ const EX_DB = {
 
 const DEFAULT = {
   days: [
-    { id:"lun", name:"Lunes", subtitle:"Pecho · Espalda · Bíceps · Hombros · Gemelos · Abs", exercises:[
-      mkEx("Vuelos en polea",2), mkEx("Press Banca",3), mkEx("Aperturas Descendentes (Upper Pec)",2),
-      mkEx("T-Bar Row",2), mkEx("Jalón V",2), mkEx("Biceps Curl",2), mkEx("Decline Crunches",2), mkEx("Standing Calves",2) ]},
-    { id:"mar", name:"Martes", subtitle:"Piernas · Tríceps · Antebrazo", exercises:[
-      mkEx("Leg Curl",2), mkEx("Aductores",2), mkEx("Smith Squat",2), mkEx("Extensión de quads",2),
-      mkEx("Francés",2), mkEx("Extensión de Tríceps",2), mkEx("Posterior",2), mkEx("Curl antebrazo + Reverse",2) ]},
-    { id:"mie", name:"Miércoles", subtitle:"Hombros · Gemelos · Abs", exercises:[
-      mkEx("Vuelos en Polea",3), mkEx("Vuelos con Mancuernas",3), mkEx("Standing Calves",3),
-      mkEx("Decline Crunches",3), mkEx("Posterior",2) ]},
-    { id:"jue", name:"Jueves", subtitle:"Pecho · Espalda · Bíceps · Antebrazo", exercises:[
-      mkEx("Pecho Inclinado Smith",3), mkEx("Pec Dec",2), mkEx("Horizontal Row",2), mkEx("Jalón Neutro",2),
-      mkEx("Remo Unilateral",2), mkEx("Biceps Curl en Polea",2), mkEx("Bayesian",2), mkEx("Curl antebrazo + Reverse",2) ]},
-    { id:"vie", name:"Viernes", subtitle:"Piernas · Tríceps · Hombros · Gemelos", exercises:[
-      mkEx("RDL",2), mkEx("Prensa",2), mkEx("Extensión de cuádriceps",2), mkEx("Posterior",2),
-      mkEx("Vuelos en Polea",2), mkEx("Katana en Smith",2), mkEx("Extensión de Tríceps",2), mkEx("Standing Calves",2) ]}
+    { id:"up1", name:"Upper 1", subtitle:"Hombros · Pecho · Espalda · Brazos", exercises:[
+      mkEx("Cable Lateral Raises",2), mkEx("Press Plano Mancuernas",2), mkEx("Máquina Remo Unilateral",2),
+      mkEx("Upper pec Cable Flies",2), mkEx("Jalón Polea Abierto",2), mkEx("Extensiones de Tríceps",3),
+      mkEx("Bíceps Polea Barra Dado Vuelta",2) ]},
+    { id:"low1", name:"Lower 1", subtitle:"Isquios · Cuádriceps · Glúteos · Gemelos · Abs", exercises:[
+      mkEx("Posterior en polea",2), mkEx("Gemelos",2), mkEx("Isquios Acostado",1), mkEx("RDL",2),
+      mkEx("Prensa",2), mkEx("Extensión Cuad",2), mkEx("Aductores",1), mkEx("Abdominales Bandera",2) ]},
+    { id:"up2", name:"Upper 2", subtitle:"Hombros · Espalda · Pecho · Brazos", exercises:[
+      mkEx("DB Lateral Raises",2), mkEx("T-Bar Row",2), mkEx("Smith OHP",1), mkEx("Press Smith Inclinado",2),
+      mkEx("Jalón en estocada",2), mkEx("Pec Dec",1), mkEx("Press Francés",2), mkEx("Predicador Unilat Mancuerna",3) ]},
+    { id:"low2", name:"Lower 2", subtitle:"Isquios · Cuádriceps · Glúteos · Gemelos · Abs", exercises:[
+      mkEx("Posterior en polea",2), mkEx("Gemelos",2), mkEx("Lower back hyperextension",2), mkEx("Isquios Acostado",2),
+      mkEx("Smith Squat",2), mkEx("Extensiones Cuads",1), mkEx("Aductores",1), mkEx("Crunches",2) ]}
   ],
   habits: [
     { id: uid(), name: "Creatina · 5 g", done: false },
@@ -484,6 +493,7 @@ if (typeof state.water === "undefined") state.water = 0;
 if (typeof state.waterGoal === "undefined") state.waterGoal = 3000;
 if (typeof state.waterDate === "undefined") state.waterDate = today();
 if (typeof state.restDefault === "undefined") state.restDefault = 120;
+if (!Array.isArray(state.sessions)) state.sessions = [];
 
 let view = "entreno";
 let activeId = ({1:"lun",2:"mar",3:"mie",4:"jue",5:"vie"})[new Date().getDay()] || "lun";
@@ -538,6 +548,7 @@ function fmt(ms, ceil){ let s = ceil?Math.ceil(ms/1000):Math.floor(ms/1000); if(
 let calEditing=false, creatingFood=false, selectedFood=null, editEntry=null, foodQuery="", lastResults=[];
 let exPicker=null, exCat="pecho", exQuery="";
 let weightForm = {date: today(), kg: ""};
+let loadEx = null;
 let calForm={sex:"m",age:"",height:"",weight:"",activity:"mod",goal:"mantener"};
 let foodForm={name:"",kcal:"",p:"",c:"",f:""};
 const RC = 2*Math.PI*52;
@@ -636,6 +647,8 @@ function renderEntreno(){
     </div>
     ${cards || '<div class="empty">Día vacío.<br>Agregá ejercicios acá abajo 👇</div>'}
     <button class="add-ex" data-action="ex-add-open">+ Agregar ejercicio</button>
+    ${d.exercises.length ? '<button class="save-session" data-action="save-session">✓ Guardar entreno de hoy</button>' : ''}
+    <button class="reset-routine" data-action="load-default-routine">↻ Cargar rutina por defecto</button>
     <p class="foot">Se guarda solo en este dispositivo</p>`;
 }
 
@@ -913,9 +926,9 @@ function renderWChart(ws){
   const area=pts.length>1 ? "M"+pts[0].x.toFixed(1)+" "+baseY+" "+pts.map(p=>"L"+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" ")+" L"+pts[pts.length-1].x.toFixed(1)+" "+baseY+" Z" : "";
   const yVals=[hiK,(loK+hiK)/2,loK];
   const grid=yVals.map(v=>{const y=Y(v).toFixed(1);return '<line x1="'+pl+'" y1="'+y+'" x2="'+(W-pr)+'" y2="'+y+'" stroke="#1d2742" stroke-width="1"/><text x="'+(pl-6)+'" y="'+(parseFloat(y)+3).toFixed(1)+'" fill="#586087" font-size="9" text-anchor="end">'+v.toFixed(1)+'</text>';}).join("");
-  const dots=pts.map((p,i)=>'<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+(i===pts.length-1?4:3)+'" fill="'+(i===pts.length-1?'#5b9dff':'#3b82f6')+'"/>').join("");
+  const dots=pts.map((p,i)=>'<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+(i===pts.length-1?4:3)+'" fill="'+(i===pts.length-1?'#ff9a4d':'#f97316')+'"/>').join("");
   const xl='<text x="'+pl+'" y="'+(H-6)+'" fill="#586087" font-size="9" text-anchor="start">'+fmtDate(ws[0].date)+'</text>'+(ws.length>1?'<text x="'+(W-pr)+'" y="'+(H-6)+'" fill="#586087" font-size="9" text-anchor="end">'+fmtDate(ws[ws.length-1].date)+'</text>':'');
-  return '<div class="w-chart"><svg viewBox="0 0 '+W+' '+H+'" width="100%"><defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#3b82f6" stop-opacity="0"/></linearGradient></defs>'+grid+(area?'<path d="'+area+'" fill="url(#wg)" opacity="0.3"/>':'')+(pts.length>1?'<path d="'+line+'" fill="none" stroke="#4f9bff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>':'')+dots+xl+'</svg></div>';
+  return '<div class="w-chart"><svg viewBox="0 0 '+W+' '+H+'" width="100%"><defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f97316"/><stop offset="1" stop-color="#f97316" stop-opacity="0"/></linearGradient></defs>'+grid+(area?'<path d="'+area+'" fill="url(#wg)" opacity="0.3"/>':'')+(pts.length>1?'<path d="'+line+'" fill="none" stroke="#ff9a4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>':'')+dots+xl+'</svg></div>';
 }
 function muscleOf(name){ const n=(name||"").trim().toLowerCase(); for(const cat in EX_DB){ if(EX_DB[cat].some(x=>x.toLowerCase()===n)) return cat; } return "otros"; }
 function renderVolumen(){
@@ -931,6 +944,51 @@ function renderVolumen(){
     <div class="vol-sub">${total} series por semana · ${rows.length} grupos musculares</div>
     <div class="vol-card">${bars}</div>
     <p class="foot">Series totales por grupo sumando todos tus días de rutina. Una guía general de hipertrofia es ~10–20 series por grupo a la semana.</p>`;
+}
+function exercisesInHistory(){
+  const m={}; (state.sessions||[]).forEach(se=>(se.exercises||[]).forEach(ex=>{ if(ex.name) m[ex.name]=1; }));
+  return Object.keys(m).sort((a,b)=>a.localeCompare(b,"es"));
+}
+function loadSeriesFor(name){
+  const out=[];
+  (state.sessions||[]).slice().sort((a,b)=>(a.ts||0)-(b.ts||0)).forEach(se=>{
+    let mx=0; (se.exercises||[]).forEach(ex=>{ if(ex.name===name) (ex.sets||[]).forEach(s=>{ const k=+s.kg||0; if(k>mx) mx=k; }); });
+    if(mx>0) out.push({date:se.date, kg:mx});
+  });
+  return out;
+}
+function renderCargas(){
+  const exs=exercisesInHistory();
+  if(!exs.length) return "";
+  if(!loadEx || exs.indexOf(loadEx)<0) loadEx=exs[0];
+  const series=loadSeriesFor(loadEx);
+  const opts=exs.map(n=>'<option value="'+esc(n)+'"'+(n===loadEx?' selected':'')+'>'+esc(n)+'</option>').join("");
+  const chart=series.length?renderWChart(series):'<div class="cal-hint">Sin kg registrados para este ejercicio.</div>';
+  return '<div class="hb-head" style="margin-top:28px"><div class="hb-title">Evolución de cargas</div><div class="title-accent"></div></div>'+
+    '<select class="form-input load-sel" data-action="load-ex">'+opts+'</select>'+
+    '<div class="load-cap">Máximo de kg levantado por sesión</div>'+chart;
+}
+function renderHistorial(){
+  const sess=(state.sessions||[]).slice().sort((a,b)=>(b.ts||0)-(a.ts||0));
+  if(!sess.length) return "";
+  const items=sess.slice(0,20).map(se=>{
+    const names=(se.exercises||[]).map(e=>e.name).join(", ");
+    const ns=(se.exercises||[]).reduce((x,e)=>x+(e.sets||[]).length,0);
+    return '<div class="sess-item"><div class="sess-main"><div class="sess-date">'+fmtDate(se.date)+' · '+esc(se.day||"")+' <span class="sess-n">('+ns+' series)</span></div><div class="sess-exs">'+esc(names)+'</div></div><button class="diary-rm" data-action="session-remove" data-id="'+se.id+'" title="Borrar">✕</button></div>';
+  }).join("");
+  return '<div class="hb-head" style="margin-top:28px"><div class="hb-title">Historial de entrenos</div><div class="title-accent"></div></div>'+items;
+}
+function saveSession(){
+  const d=day(); const exs=[];
+  (d.exercises||[]).forEach(ex=>{
+    const sets=(ex.sets||[]).map(s=>({kg:parseFloat(String(s.kg).replace(",","."))||0, reps:parseInt(s.reps)||0})).filter(s=>s.kg>0||s.reps>0);
+    if(sets.length) exs.push({name:ex.name, sets:sets});
+  });
+  if(!exs.length){ alert("Cargá kg o reps en al menos una serie antes de guardar el entreno."); return; }
+  state.sessions.push({id:uid(), date:today(), ts:Date.now(), day:d.name, exercises:exs});
+  save();
+  alert("¡Entreno guardado! 💪  Mirá tu progreso en Progreso → Evolución de cargas.");
+  renderApp();
 }
 function renderProgreso(){
   const ws=(state.weights||[]).slice().sort((a,b)=>a.date<b.date?-1:(a.date>b.date?1:0));
@@ -954,7 +1012,9 @@ function renderProgreso(){
       <input id="wKg" class="form-input" type="text" inputmode="decimal" placeholder="kg" value="${esc(weightForm.kg)}" style="width:88px" data-action="wkg-field">
       <button class="form-save" style="width:auto;padding:0 18px;margin-top:0" data-action="weight-save">Guardar</button>
     </div>
-    ${list?`<div class="w-list-head">Historial</div>${list}`:""}
+    ${list?`<div class="w-list-head">Historial de peso</div>${list}`:""}
+    ${renderCargas()}
+    ${renderHistorial()}
     ${renderVolumen()}`;
 }
 
@@ -1070,6 +1130,7 @@ document.body.addEventListener("keydown", e => {
 document.body.addEventListener("change", e => {
   const t=e.target, a=t.dataset.action; if(!a) return;
   if (a === "wdate-field") { weightForm.date = t.value; return; }
+  if (a === "load-ex") { loadEx = t.value; renderApp(); return; }
 });
 
 document.body.addEventListener("click", e => {
@@ -1157,8 +1218,11 @@ document.body.addEventListener("click", e => {
   if (a === "rest-pick") { state.restDefault = parseInt(el.dataset.sec)||120; save(); renderRestBar(); return; }
   if (a === "rest-play") { startRest(state.restDefault||120); return; }
   if (a === "rest-stop") { stopRest(); return; }
+  if (a === "save-session") { saveSession(); return; }
+  if (a === "session-remove") { if(confirm("¿Borrar este entreno del historial?")){ state.sessions=state.sessions.filter(x=>x.id!==el.dataset.id); save(); renderApp(); } return; }
 
   // Días
+  if (a === "load-default-routine") { if(confirm("Esto reemplaza tus días de rutina actuales por la rutina por defecto (Upper/Lower). No toca tus pesos, sesiones ni hábitos. ¿Seguro?")){ state.days = JSON.parse(JSON.stringify(DEFAULT.days)); activeId = state.days[0].id; save(); renderApp(); } return; }
   if (a === "addday") { const nd={id:uid(),name:"Nuevo",subtitle:"",exercises:[]}; state.days.push(nd); activeId=nd.id; pendingFocusDay=true; save(); renderApp(); return; }
   if (a === "delday") { if(state.days.length<=1){ alert("Tiene que quedar al menos un día."); return; } if(confirm("¿Eliminar este día?")){ state.days=state.days.filter(x=>x.id!==activeId); activeId=state.days[0].id; save(); renderApp(); } return; }
 
